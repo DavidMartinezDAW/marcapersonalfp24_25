@@ -1,2 +1,0 @@
-@extends('dopetrope.master')
-
