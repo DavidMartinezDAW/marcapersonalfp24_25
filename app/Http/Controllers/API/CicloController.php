@@ -14,6 +14,12 @@ class CicloController extends Controller
      */
     public function index(Request $request)
     {
+
+        $start = $request->_start ?? 1;
+        $end = $request->_end ?? 15;
+        $request->merge(['perPage' => 1 + $end - $start]);
+        $request->merge(['page' => intval($start / $request->perPage) + 1]);
+
         return CicloResource::collection(
             Ciclo::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)
