@@ -23,7 +23,7 @@ class ReactAdminResponse
             $request->merge(['page' => intval($request->_start / $request->perPage) + 1]);
         }
 
-        response = $next($request);
+        $response = $next($request);
         if($request->routeIs('*.index')) {
             abort_unless(property_exists($request->route()->controller, 'modelclass'), 500, "It must exists a modelclass property in the controller.");
             $modelClassName = $request->route()->controller->modelclass;
