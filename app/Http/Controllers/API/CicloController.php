@@ -14,6 +14,18 @@ class CicloController extends Controller
      */
     public function index(Request $request)
     {
+        $query = FileterHelper::aplyFilter($request, [
+            'codCiclo',
+            'codFamilia',
+            'grado',
+            'nombre'
+        ]);
+
+        $query = FilterHelper::aplySort($request, $query);
+
+        return CicloResource::collection(
+            ->paginate($request->perPage)
+        );
 
         $start = $request->_start ?? 1;
         $end = $request->_end ?? 15;
